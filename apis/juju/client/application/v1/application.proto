@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package juju.client.application.v1;
+
+import "google/api/annotations.proto";
+
+service ApplicationService {
+    rpc Deploy(DeployRequest) returns (stream ResponseLine) {
+        option (google.api.http) = {
+            post: "/v1/deploy"
+            body: "*"
+        };
+    }
+}
+
+message DeployRequest {
+    string application_name = 1;
+    string channel = 2;
+    string series = 3;
+    bool dry_run = 4;
+}
+
+enum ResponseLineType {
+    UNKNOWN_REPONSE_LINE_TYPE = 0;
+    STDOUT = 1;
+    STDERR = 2;
+}
+
+message ResponseLine {
+    string content = 1;
+    ResponseLineType type = 2;    
+}
