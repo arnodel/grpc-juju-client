@@ -1,0 +1,201 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "juju/client/application/v1/application.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ApplicationService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/deploy": {
+      "post": {
+        "summary": "Deploy a new application.",
+        "operationId": "ApplicationService_Deploy",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1ResponseLine"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1ResponseLine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1DeployRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/v1/remove": {
+      "post": {
+        "summary": "Remove an application from the model.",
+        "operationId": "ApplicationService_Remove",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/v1ResponseLine"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of v1ResponseLine"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1RemoveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1DeployRequest": {
+      "type": "object",
+      "properties": {
+        "artifactName": {
+          "type": "string",
+          "description": "Charm or bundle to deploy."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Name of application to deploy (optional, if unspecified it will be taken\nfrom the artifact name)."
+        },
+        "channel": {
+          "type": "string",
+          "description": "Channel to use when deploying a charm or bundle from the charm store, or\ncharm hub (optional)."
+        },
+        "series": {
+          "type": "string",
+          "description": "The series on which to deploy (optional)."
+        },
+        "dryRun": {
+          "type": "boolean",
+          "description": "If true, just show what the bundle deploy would do."
+        }
+      },
+      "description": "Request message for the Deploy RPC."
+    },
+    "v1RemoveRequest": {
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "title": "Name of application to remove"
+        },
+        "force": {
+          "type": "boolean",
+          "title": "If true, completely remove the application and all its dependencies"
+        },
+        "noWait": {
+          "type": "boolean",
+          "title": "If true, rush through application removal without waiting for each\nindividual step to complete"
+        }
+      },
+      "description": "Request message for the Remove RPC."
+    },
+    "v1ResponseLine": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Textual content of the line"
+        },
+        "type": {
+          "$ref": "#/definitions/v1ResponseLineType",
+          "title": "Line type"
+        }
+      },
+      "description": "A response line for a command."
+    },
+    "v1ResponseLineType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN_REPONSE_LINE_TYPE",
+        "STDOUT",
+        "STDERR"
+      ],
+      "default": "UNKNOWN_REPONSE_LINE_TYPE",
+      "description": "Type of the response line."
+    }
+  }
+}

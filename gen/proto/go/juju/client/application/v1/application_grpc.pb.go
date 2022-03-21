@@ -24,6 +24,8 @@ const _ = grpc.SupportPackageIsVersion7
 type ApplicationServiceClient interface {
 	// Deploy a new application.
 	Deploy(ctx context.Context, in *DeployRequest, opts ...grpc.CallOption) (ApplicationService_DeployClient, error)
+	// Remove an application from the model.
+	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (ApplicationService_RemoveClient, error)
 }
 
 type applicationServiceClient struct {
@@ -66,12 +68,46 @@ func (x *applicationServiceDeployClient) Recv() (*ResponseLine, error) {
 	return m, nil
 }
 
+func (c *applicationServiceClient) Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (ApplicationService_RemoveClient, error) {
+	stream, err := c.cc.NewStream(ctx, &ApplicationService_ServiceDesc.Streams[1], "/juju.client.application.v1.ApplicationService/Remove", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &applicationServiceRemoveClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type ApplicationService_RemoveClient interface {
+	Recv() (*ResponseLine, error)
+	grpc.ClientStream
+}
+
+type applicationServiceRemoveClient struct {
+	grpc.ClientStream
+}
+
+func (x *applicationServiceRemoveClient) Recv() (*ResponseLine, error) {
+	m := new(ResponseLine)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ApplicationServiceServer is the server API for ApplicationService service.
 // All implementations must embed UnimplementedApplicationServiceServer
 // for forward compatibility
 type ApplicationServiceServer interface {
 	// Deploy a new application.
 	Deploy(*DeployRequest, ApplicationService_DeployServer) error
+	// Remove an application from the model.
+	Remove(*RemoveRequest, ApplicationService_RemoveServer) error
 	mustEmbedUnimplementedApplicationServiceServer()
 }
 
@@ -81,6 +117,9 @@ type UnimplementedApplicationServiceServer struct {
 
 func (UnimplementedApplicationServiceServer) Deploy(*DeployRequest, ApplicationService_DeployServer) error {
 	return status.Errorf(codes.Unimplemented, "method Deploy not implemented")
+}
+func (UnimplementedApplicationServiceServer) Remove(*RemoveRequest, ApplicationService_RemoveServer) error {
+	return status.Errorf(codes.Unimplemented, "method Remove not implemented")
 }
 func (UnimplementedApplicationServiceServer) mustEmbedUnimplementedApplicationServiceServer() {}
 
@@ -116,6 +155,27 @@ func (x *applicationServiceDeployServer) Send(m *ResponseLine) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _ApplicationService_Remove_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(RemoveRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApplicationServiceServer).Remove(m, &applicationServiceRemoveServer{stream})
+}
+
+type ApplicationService_RemoveServer interface {
+	Send(*ResponseLine) error
+	grpc.ServerStream
+}
+
+type applicationServiceRemoveServer struct {
+	grpc.ServerStream
+}
+
+func (x *applicationServiceRemoveServer) Send(m *ResponseLine) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // ApplicationService_ServiceDesc is the grpc.ServiceDesc for ApplicationService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -127,6 +187,11 @@ var ApplicationService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "Deploy",
 			Handler:       _ApplicationService_Deploy_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "Remove",
+			Handler:       _ApplicationService_Remove_Handler,
 			ServerStreams: true,
 		},
 	},

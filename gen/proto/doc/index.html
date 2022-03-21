@@ -183,6 +183,10 @@
                 </li>
               
                 <li>
+                  <a href="#juju.client.application.v1.RemoveRequest"><span class="badge">M</span>RemoveRequest</a>
+                </li>
+              
+                <li>
                   <a href="#juju.client.application.v1.ResponseLine"><span class="badge">M</span>ResponseLine</a>
                 </li>
               
@@ -257,6 +261,45 @@ charm hub (optional). </p></td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p>If true, just show what the bundle deploy would do. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="juju.client.application.v1.RemoveRequest">RemoveRequest</h3>
+        <p>Request message for the Remove RPC.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>application_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of application to remove </p></td>
+                </tr>
+              
+                <tr>
+                  <td>force</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>If true, completely remove the application and all its dependencies </p></td>
+                </tr>
+              
+                <tr>
+                  <td>no_wait</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>If true, rush through application removal without waiting for each
+individual step to complete </p></td>
                 </tr>
               
             </tbody>
@@ -347,6 +390,13 @@ charm hub (optional). </p></td>
                 <td><p>Deploy a new application.</p></td>
               </tr>
             
+              <tr>
+                <td>Remove</td>
+                <td><a href="#juju.client.application.v1.RemoveRequest">RemoveRequest</a></td>
+                <td><a href="#juju.client.application.v1.ResponseLine">ResponseLine</a> stream</td>
+                <td><p>Remove an application from the model.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -371,6 +421,16 @@ charm hub (optional). </p></td>
                 <td>Deploy</td>
                 <td>POST</td>
                 <td>/v1/deploy</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>Remove</td>
+                <td>POST</td>
+                <td>/v1/remove</td>
                 <td>*</td>
               </tr>
               

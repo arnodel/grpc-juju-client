@@ -18,7 +18,8 @@ contents of `gen/proto` is generated from this.  It contains
       `protoc-gen-grpc-gateway`);
 - a `python/` directory with generated code for Python client (generated with
   `grpcio-tools`);
-- a `doc/` directory with generated documentation (with `protoc-gen-doc`).
+- a `doc/` directory with generated HTML documentation (with `protoc-gen-doc`).
+- an `openapi/` directory with generated swagger specs
 
 ## Generating the python / Go code and HTML docs
 
@@ -58,3 +59,15 @@ grpc-juju -juju-client ~/bin/juju
 See `apis/` for supported apis.  Also the gRPC server supports reflection, so it
 is discoverable (use e.g. https://github.com/fullstorydev/grpcui to play with
 it)
+
+## Example clients
+
+The `clients/` directory contains two sample programming acting as clients to
+the gRPC server.  In order to use them `grpc-juju` should be running on the same
+machine.
+
+- `clients/go-client` contains a [Go client](./clients/go-client/main.go) that
+  can deploy or remove a deployment of postgresql and print the outcome.
+- `clients/python-client` contains a [Python
+  client](./clients/python-client/client.py) with the same functionality.  It
+  should be run via the `client.sh` script to get the import paths correct.

@@ -81,6 +81,20 @@ func (s *server) Deploy(req *applicationv1.DeployRequest, stream applicationv1.A
 	return s.runCommand(stream.Context(), stream.Send, args...)
 }
 
+func (s *server) Remove(req *applicationv1.RemoveRequest, stream applicationv1.ApplicationService_RemoveServer) error {
+	args := []string{"remove-application"}
+	if req.Force {
+		args = append(args, "--force")
+	}
+	if req.NoWait {
+		args = append(args, "--no-wait")
+	}
+	if req.ApplicationName == "" {
+		return status.Error(codes.InvalidArgument, "application name is required")
+	}
+	args = append(args, req.ApplicationName)
+	return s.runCommand(stream.Context(), stream.Send, args...)
+}
 func (s *server) runCommand(ctx context.Context, send func(*applicationv1.ResponseLine) error, options ...string) error {
 	cmd := exec.CommandContext(ctx, s.juju, options...)
 

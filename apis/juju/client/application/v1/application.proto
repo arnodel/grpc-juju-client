@@ -14,6 +14,14 @@ service ApplicationService {
             body: "*"
         };
     }
+
+    // Remove an application from the model.
+    rpc Remove(RemoveRequest) returns (stream ResponseLine) {
+        option (google.api.http) = {
+            post: "/v1/remove"
+            body: "*"
+        };
+    }
 }
 
 // Request message for the Deploy RPC.
@@ -34,6 +42,19 @@ message DeployRequest {
 
     // If true, just show what the bundle deploy would do.
     bool dry_run = 5;
+}
+
+// Request message for the Remove RPC.
+message RemoveRequest {
+    // Name of application to remove
+    string application_name = 1;
+
+    // If true, completely remove the application and all its dependencies
+    bool force = 2;
+
+    // If true, rush through application removal without waiting for each
+    // individual step to complete
+    bool no_wait = 3;
 }
 
 // Type of the response line.
