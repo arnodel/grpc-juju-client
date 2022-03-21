@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036com.juju.client.application.v1B\020ApplicationProtoP\001ZVgithub.com/arnodel/grpc-juju-client/protos/go/juju/client/application/v1;applicationv1\242\002\003JCA\252\002\032Juju.Client.Application.V1\312\002\032Juju\\Client\\Application\\V1\342\002&Juju\\Client\\Application\\V1\\GPBMetadata\352\002\035Juju::Client::Application::V1',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n,juju/client/application/v1/application.proto\x12\x1ajuju.client.application.v1\x1a\x1cgoogle/api/annotations.proto\"\x85\x01\n\rDeployRequest\x12)\n\x10\x61pplication_name\x18\x01 \x01(\tR\x0f\x61pplicationName\x12\x18\n\x07\x63hannel\x18\x02 \x01(\tR\x07\x63hannel\x12\x16\n\x06series\x18\x03 \x01(\tR\x06series\x12\x17\n\x07\x64ry_run\x18\x04 \x01(\x08R\x06\x64ryRun\"j\n\x0cResponseLine\x12\x18\n\x07\x63ontent\x18\x01 \x01(\tR\x07\x63ontent\x12@\n\x04type\x18\x02 \x01(\x0e\x32,.juju.client.application.v1.ResponseLineTypeR\x04type*I\n\x10ResponseLineType\x12\x1d\n\x19UNKNOWN_REPONSE_LINE_TYPE\x10\x00\x12\n\n\x06STDOUT\x10\x01\x12\n\n\x06STDERR\x10\x02\x32\x8c\x01\n\x12\x41pplicationService\x12v\n\x06\x44\x65ploy\x12).juju.client.application.v1.DeployRequest\x1a(.juju.client.application.v1.ResponseLine\"\x15\x82\xd3\xe4\x93\x02\x0f\"\n/v1/deploy:\x01*0\x01\x42\x95\x02\n\x1e\x63om.juju.client.application.v1B\x10\x41pplicationProtoP\x01ZVgithub.com/arnodel/grpc-juju-client/protos/go/juju/client/application/v1;applicationv1\xa2\x02\x03JCA\xaa\x02\x1aJuju.Client.Application.V1\xca\x02\x1aJuju\\Client\\Application\\V1\xe2\x02&Juju\\Client\\Application\\V1\\GPBMetadata\xea\x02\x1dJuju::Client::Application::V1b\x06proto3'
+  serialized_pb=b'\n,juju/client/application/v1/application.proto\x12\x1ajuju.client.application.v1\x1a\x1cgoogle/api/annotations.proto\"\xaa\x01\n\rDeployRequest\x12#\n\rartifact_name\x18\x01 \x01(\tR\x0c\x61rtifactName\x12)\n\x10\x61pplication_name\x18\x02 \x01(\tR\x0f\x61pplicationName\x12\x18\n\x07\x63hannel\x18\x03 \x01(\tR\x07\x63hannel\x12\x16\n\x06series\x18\x04 \x01(\tR\x06series\x12\x17\n\x07\x64ry_run\x18\x05 \x01(\x08R\x06\x64ryRun\"j\n\x0cResponseLine\x12\x18\n\x07\x63ontent\x18\x01 \x01(\tR\x07\x63ontent\x12@\n\x04type\x18\x02 \x01(\x0e\x32,.juju.client.application.v1.ResponseLineTypeR\x04type*I\n\x10ResponseLineType\x12\x1d\n\x19UNKNOWN_REPONSE_LINE_TYPE\x10\x00\x12\n\n\x06STDOUT\x10\x01\x12\n\n\x06STDERR\x10\x02\x32\x8c\x01\n\x12\x41pplicationService\x12v\n\x06\x44\x65ploy\x12).juju.client.application.v1.DeployRequest\x1a(.juju.client.application.v1.ResponseLine\"\x15\x82\xd3\xe4\x93\x02\x0f\"\n/v1/deploy:\x01*0\x01\x42\x95\x02\n\x1e\x63om.juju.client.application.v1B\x10\x41pplicationProtoP\x01ZVgithub.com/arnodel/grpc-juju-client/protos/go/juju/client/application/v1;applicationv1\xa2\x02\x03JCA\xaa\x02\x1aJuju.Client.Application.V1\xca\x02\x1aJuju\\Client\\Application\\V1\xe2\x02&Juju\\Client\\Application\\V1\\GPBMetadata\xea\x02\x1dJuju::Client::Application::V1b\x06proto3'
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -50,8 +50,8 @@ _RESPONSELINETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=350,
-  serialized_end=423,
+  serialized_start=387,
+  serialized_end=460,
 )
 _sym_db.RegisterEnumDescriptor(_RESPONSELINETYPE)
 
@@ -71,29 +71,36 @@ _DEPLOYREQUEST = _descriptor.Descriptor(
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='application_name', full_name='juju.client.application.v1.DeployRequest.application_name', index=0,
+      name='artifact_name', full_name='juju.client.application.v1.DeployRequest.artifact_name', index=0,
       number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='artifactName', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='application_name', full_name='juju.client.application.v1.DeployRequest.application_name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='applicationName', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='channel', full_name='juju.client.application.v1.DeployRequest.channel', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='channel', full_name='juju.client.application.v1.DeployRequest.channel', index=2,
+      number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='channel', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='series', full_name='juju.client.application.v1.DeployRequest.series', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='series', full_name='juju.client.application.v1.DeployRequest.series', index=3,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='series', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='dry_run', full_name='juju.client.application.v1.DeployRequest.dry_run', index=3,
-      number=4, type=8, cpp_type=7, label=1,
+      name='dry_run', full_name='juju.client.application.v1.DeployRequest.dry_run', index=4,
+      number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -111,7 +118,7 @@ _DEPLOYREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=107,
-  serialized_end=240,
+  serialized_end=277,
 )
 
 
@@ -149,8 +156,8 @@ _RESPONSELINE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=242,
-  serialized_end=348,
+  serialized_start=279,
+  serialized_end=385,
 )
 
 _RESPONSELINE.fields_by_name['type'].enum_type = _RESPONSELINETYPE
@@ -183,8 +190,8 @@ _APPLICATIONSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=426,
-  serialized_end=566,
+  serialized_start=463,
+  serialized_end=603,
   methods=[
   _descriptor.MethodDescriptor(
     name='Deploy',

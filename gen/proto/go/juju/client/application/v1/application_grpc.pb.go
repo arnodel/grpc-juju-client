@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApplicationServiceClient interface {
+	// Deploy a new application.
 	Deploy(ctx context.Context, in *DeployRequest, opts ...grpc.CallOption) (ApplicationService_DeployClient, error)
 }
 
@@ -69,6 +70,7 @@ func (x *applicationServiceDeployClient) Recv() (*ResponseLine, error) {
 // All implementations must embed UnimplementedApplicationServiceServer
 // for forward compatibility
 type ApplicationServiceServer interface {
+	// Deploy a new application.
 	Deploy(*DeployRequest, ApplicationService_DeployServer) error
 	mustEmbedUnimplementedApplicationServiceServer()
 }

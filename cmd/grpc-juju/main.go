@@ -12,8 +12,10 @@ import (
 	applicationv1 "github.com/arnodel/grpc-juju-client/gen/proto/go/juju/client/application/v1"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/status"
 )
 
 func main() {
@@ -69,6 +71,10 @@ func (s *server) Deploy(req *applicationv1.DeployRequest, stream applicationv1.A
 	if req.DryRun {
 		args = append(args, "--dry-run")
 	}
+	if req.ArtifactName == "" {
+		return status.Error(codes.InvalidArgument, "artifact name is required")
+	}
+	args = append(args, req.ArtifactName)
 	if req.ApplicationName != "" {
 		args = append(args, req.ApplicationName)
 	}

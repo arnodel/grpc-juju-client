@@ -17,3 +17,5 @@ plugins:
     opt: paths=source_relative
   - name: python
     out: gen/proto/python
+  - name: doc
+    out: gen/proto/doc
