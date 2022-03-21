@@ -1,15 +1,23 @@
 # POC gRPC API for juju
 
-The idea of this is to showcase gRPC by creating a proxy gRPC server for the juju client.  Documentation and client APIs for Go and Python are generated from the protobuf specification.
+The idea of this is to showcase gRPC by creating a proxy gRPC server for the
+juju client.  Documentation and client APIs for Go and Python are generated from
+the protobuf specification.
+
 
 ## The protobuf spec
 
-A service spec is defined in [application.proto](./apis/juju/client/application/v1/application.proto).  The contents of `gen/proto` is generated from this.  It contains
+A service spec is defined in
+[application.proto](./apis/juju/client/application/v1/application.proto).  The
+contents of `gen/proto` is generated from this.  It contains
 
 - a `go/` directory with
-    - Generated code for Go client / server (generated with `protoc-gen-go` and `protoc-gen-go-grpc`);
-    - Generated code for an HTTP gateway to a gRPC server (generated with `protoc-gen-grpc-gateway`);
-- a `python/` directory with generated code for Python client (generated with `grpcio-tools`);
+    - Generated code for Go client / server (generated with `protoc-gen-go` and
+      `protoc-gen-go-grpc`);
+    - Generated code for an HTTP gateway to a gRPC server (generated with
+      `protoc-gen-grpc-gateway`);
+- a `python/` directory with generated code for Python client (generated with
+  `grpcio-tools`);
 - a `doc/` directory with generated documentation (with `protoc-gen-doc`).
 
 ## Generating the python / Go code and HTML docs
