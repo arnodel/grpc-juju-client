@@ -146,12 +146,13 @@ func RegisterApplicationServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/juju.client.application.v1.ApplicationService/Deploy", runtime.WithHTTPPathPattern("/v1/deploy"))
+		var err error
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/juju.client.application.v1.ApplicationService/Deploy", runtime.WithHTTPPathPattern("/v1/deploy"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ApplicationService_Deploy_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ApplicationService_Deploy_0(ctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -166,12 +167,13 @@ func RegisterApplicationServiceHandlerClient(ctx context.Context, mux *runtime.S
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/juju.client.application.v1.ApplicationService/Remove", runtime.WithHTTPPathPattern("/v1/remove"))
+		var err error
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/juju.client.application.v1.ApplicationService/Remove", runtime.WithHTTPPathPattern("/v1/remove"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_ApplicationService_Remove_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_ApplicationService_Remove_0(ctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
