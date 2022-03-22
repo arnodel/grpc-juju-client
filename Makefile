@@ -9,7 +9,7 @@ $(GO_BIN)/protoc-gen-doc:
 	go install github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
 install-python-deps:
-	pip install grpcio-tools google-api-python-client-stubs
+	pip3 install grpcio-tools google-api-python-client-stubs
 
 bin/buf:
 	curl -sSL https://github.com/bufbuild/buf/releases/download/v$(BUF_VERSION)/buf-$(shell uname -s)-$(shell uname -m) --output bin/buf

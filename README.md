@@ -4,6 +4,9 @@ The idea of this is to showcase gRPC by creating a proxy gRPC server for the
 juju client.  Documentation and client APIs for Go and Python are generated from
 the protobuf specification.
 
+## Requirements
+
+Tested on Linux / MacOS with python3 / pip3.
 
 ## The protobuf spec
 
